@@ -1,16 +1,16 @@
 # TaskMaster
 
-TaskMaster — это full-stack приложение для управления задачами и проектами. Проект объединяет frontend на Angular и backend на Node.js/Express, что позволяет удобно создавать, просматривать, редактировать и удалять задачи.
+TaskMaster is a full-stack application for managing tasks and projects. The project combines a frontend built with Angular and a backend built with Node.js/Express, making it easy to create, view, edit, and delete tasks.
 
-## Основные возможности
+## Features
 
-- Создание и управление задачами
-- Просмотр списка задач
-- Редактирование и удаление задач
-- Аутентификация пользователей
-- REST API для взаимодействия с клиентской частью
+- Create and manage tasks
+- View the task list
+- Edit and delete tasks
+- User authentication
+- REST API for client-server communication
 
-## Технологии
+## Technologies
 
 ### Frontend
 - Angular
@@ -22,18 +22,18 @@ TaskMaster — это full-stack приложение для управлени�
 - Node.js
 - Express.js
 - MongoDB
-- JWT-аутентификация
+- JWT authentication
 
-## Структура проекта
+## Project Structure
 
-- backend/ — серверная часть приложения
-- frontend/ — клиентская часть приложения
+- backend/ — server-side part of the application
+- frontend/ — client-side part of the application
 
-## Установка
+## Installation
 
-### Требования
+### Requirements
 - Node.js
-- npm или pnpm
+- npm or pnpm
 - MongoDB
 
 ### Backend
@@ -50,13 +50,13 @@ npm install
 ng serve
 ```
 
-## Использование
+## Usage
 
-После запуска приложения откройте браузер и перейдите по адресу:
+After starting the application, open your browser and go to:
 
 - Frontend: http://localhost:4200
 - Backend: http://localhost:3000
 
-## Автор
+## Author
 
 BaberMikita
