@@ -1,0 +1,25 @@
+### Проверка главного роута (GET)
+GET http://localhost:3000/
+
+### Создать новую задачу в базе (POST)
+POST http://localhost:3000/api/tasks
+Content-Type: application/json
+
+{
+  "isCompleted": true
+}
+
+### Получить все задачи из базы (GET)
+GET http://localhost:3000/api/tasks
+### HIve75nsyihHhtxC
+
+### Обновить статус задачи по ID (PATCH)
+PATCH http://localhost:3000/api/tasks/6a32c8168a116c4d55a3bd75
+Content-Type: application/json
+
+{
+  "isCompleted": true
+}
+
+### Удалить задачу по ID (DELETE)
+DELETE http://localhost:3000/api/tasks/6a32c8168a116c4d55a3bd75
