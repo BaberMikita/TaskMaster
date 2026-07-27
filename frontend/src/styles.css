@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Убираем отступы по умолчанию */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Настраиваем фон для body */
+body {
+  background: linear-gradient(-45deg, #5a1f8f, #8e4bd6, #f59e0b, #f97316);
+  background-size: 400% 400%;
+  animation: gradientBG 14s ease infinite;
+}
+
+/* Сама инструкция для анимации (как именно двигать фон) */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}

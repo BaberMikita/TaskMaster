@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.light-theme .page {
+  background: linear-gradient(135deg, #e0f2fe, #fef3c7, #f5f3ff, #fdf2f8);
+}
+
+body.light-theme .card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eef2ff 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
+}
+
+body.light-theme .title {
+  color: #111827;
+}
+
+body.light-theme .subtitle {
+  color: #64748b;
+}
+
+body.light-theme .task-input,
+body.light-theme .task-date-input {
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  color: #111827;
+}
+
+body.light-theme .task-input:focus,
+body.light-theme .task-date-input:focus {
+  background: #ffffff;
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.16);
+}
+
+body.light-theme .task-item {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+body.light-theme .task-title {
+  color: #111827;
+}
+
+body.light-theme .task-title.done {
+  color: #64748b;
+}
+
+body.light-theme .empty-msg {
+  color: rgba(15, 23, 42, 0.45);
+}
+
+/* ── Page layout ── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #5a1f8f, #8e4bd6, #f59e0b, #f97316);
+  background-size: 300% 300%;
+  animation: gradientBG 12s ease infinite;
+  font-family: 'Inter', sans-serif;
+  padding: 2rem;
+}
+
+/* ── Card ── */
+.card {
+  background: linear-gradient(135deg, #1f2a44 0%, #24364f 45%, #2c3e5b 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Header ── */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f3f6ff;
+  margin-bottom: 0.25rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #9fb0cc;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+/* ── Add button ── */
+.btn-add {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: #5b7cfa;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.35s ease, transform 0.25s ease;
+  margin-bottom: 1.75rem;
+}
+
+.btn-add:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.btn-add:active {
+  transform: translateY(0);
+}
+
+/* ── Add task block ── */
+.task-add-block {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.task-input,
+.task-date-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: #f3f6ff;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-input:focus,
+.task-date-input:focus {
+  background: rgba(20, 28, 46, 0.95);
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.16);
+}
+
+.task-date-input {
+  max-width: 170px;
+}
+
+.task-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5);
+}
+
+.task-date-input::-moz-calendar-picker-indicator {
+  filter: invert(1) brightness(1.5);
+}
+
+.btn-secondary {
+  padding: 0.85rem 1rem;
+  background: #6b7a90;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Task list ── */
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: background 0.2s ease;
+}
+
+.task-item:hover {
+  background: rgba(24, 34, 56, 0.9);
+}
+
+/* ── Checkbox ── */
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #ff7a00;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+/* ── Task title ── */
+.task-title {
+  flex: 1;
+  color: #f3f6ff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.task-title.done {
+  text-decoration: line-through;
+  color: #8da0bf;
+}
+
+/* ── Square action buttons ── */
+.btn-delete,
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.56s ease, color 0.56s ease, transform 0.3s ease;
+}
+
+.btn-delete {
+  background: linear-gradient(90deg, rgba(255, 80, 80, 0.12), rgba(255, 80, 80, 0.06));
+  color: rgba(255, 100, 100, 0.95);
+  border-color: rgba(255, 80, 80, 0.14);
+}
+
+.btn-edit {
+  background: linear-gradient(90deg, rgba(72, 187, 120, 0.14), rgba(34, 197, 94, 0.08));
+  color: rgba(34, 197, 94, 0.95);
+  border-color: rgba(34, 197, 94, 0.14);
+}
+
+.btn-delete:hover {
+  background: linear-gradient(90deg, #ff6b6b, #ff5252);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-edit:hover {
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f3f6ff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-1px);
+}
+
+/* Logout button (header) */
+.btn-logout {
+  padding: 0.5rem 0.9rem;
+  background: linear-gradient(90deg, rgba(255, 80, 80, 0.15), rgba(255, 80, 80, 0.08));
+  color: rgba(255, 100, 100, 0.95);
+  border: 1px solid rgba(255, 80, 80, 0.18);
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.56s ease, color 0.56s ease, transform 0.3s ease;
+}
+
+.btn-logout:hover {
+  background: linear-gradient(90deg, #ff6b6b, #ff5252);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ── Empty state ── */
+.empty-msg {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.my-block {
+  margin-top: 24px;
+}
+
+/* Этот класс сработает только для выполненных задач */
+.completed-text {
+  text-decoration: line-through;
+  color: #9ca3af;
+  transition: all 0.2s ease;
+}
+
+/* ── Auth Form ── */
+.auth-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.95rem 1.15rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.auth-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.auth-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+}
+
+.auth-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.auth-actions .btn-add {
+  margin-bottom: 0;
+}
+
+.btn-secondary {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
