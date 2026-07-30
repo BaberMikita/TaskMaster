@@ -6,53 +6,114 @@
   padding: 0;
 }
 
-body.light-theme .page {
+.page.light-theme {
   background: linear-gradient(135deg, #e0f2fe, #fef3c7, #f5f3ff, #fdf2f8);
 }
 
-body.light-theme .card {
+.page.light-theme .card {
   background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eef2ff 100%);
   border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
 }
 
-body.light-theme .title {
+.page.light-theme .title {
   color: #111827;
 }
 
-body.light-theme .subtitle {
+.page.light-theme .subtitle {
   color: #64748b;
 }
 
-body.light-theme .task-input,
-body.light-theme .task-date-input {
+.page.light-theme .task-input,
+.page.light-theme .task-date-input {
   background: #f8fafc;
   border: 1px solid rgba(15, 23, 42, 0.12);
   color: #111827;
 }
 
-body.light-theme .task-input:focus,
-body.light-theme .task-date-input:focus {
+.page.light-theme .task-input:focus,
+.page.light-theme .task-date-input:focus {
   background: #ffffff;
   border-color: #ff7a00;
   box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.16);
 }
 
-body.light-theme .task-item {
+.page.light-theme .task-item {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-body.light-theme .task-title {
+.page.light-theme .task-title {
   color: #111827;
 }
 
-body.light-theme .task-title.done {
+.page.light-theme .task-title.done {
   color: #64748b;
 }
 
-body.light-theme .empty-msg {
+.page.light-theme .empty-msg {
   color: rgba(15, 23, 42, 0.45);
+}
+
+.page.light-theme .task-date {
+  color: #475569 !important;
+}
+
+.page.light-theme .auth-title {
+  color: #111827;
+}
+
+.page.light-theme .auth-input {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: #111827;
+}
+
+.page.light-theme .auth-input::placeholder {
+  color: #64748b;
+}
+
+.page.light-theme .auth-input:focus {
+  background: #ffffff;
+  border-color: #ff7a00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.16);
+}
+
+.page.light-theme .theme-toggle {
+  background: #ffffff;
+  color: #111827;
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+.page.light-theme .theme-toggle:hover {
+  background: #f8fafc;
+}
+
+.page.light-theme .btn-logout {
+  background: linear-gradient(90deg, rgba(248, 113, 113, 0.14), rgba(239, 68, 68, 0.08));
+  color: #b91c1c;
+  border-color: rgba(220, 38, 38, 0.18);
+}
+
+.page.light-theme .btn-secondary {
+  background: #f8fafc;
+  color: #111827;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.page.light-theme .btn-secondary:hover {
+  background: #eef2ff;
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+.page.light-theme .task-date-input::-webkit-calendar-picker-indicator {
+  filter: none;
+  opacity: 0.8;
+}
+
+.page.light-theme .task-date-input::-moz-calendar-picker-indicator {
+  filter: none;
+  opacity: 0.8;
 }
 
 /* ── Page layout ── */
@@ -278,13 +339,18 @@ body.light-theme .empty-msg {
 
 /* Theme toggle button */
 .theme-toggle {
-  padding: 0.5rem 0.8rem;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   background: rgba(255, 255, 255, 0.08);
   color: #f3f6ff;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 10px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
 }
@@ -297,6 +363,7 @@ body.light-theme .empty-msg {
 /* Logout button (header) */
 .btn-logout {
   padding: 0.5rem 0.9rem;
+  min-height: 42px;
   background: linear-gradient(90deg, rgba(255, 80, 80, 0.15), rgba(255, 80, 80, 0.08));
   color: rgba(255, 100, 100, 0.95);
   border: 1px solid rgba(255, 80, 80, 0.18);

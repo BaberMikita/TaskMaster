@@ -12,13 +12,13 @@ import { CommonModule } from '@angular/common'; // Обязательно для
   imports: [CommonModule, FormsModule],
   styleUrls: ['./app.component.css'],
   template: `
-    <div class="page">
+    <div class="page" [class.light-theme]="!themeService.isDarkMode">
       <div class="card">
         <div class="header-row">
           <h1 class="title" style="margin: 0;">📝 Мои задачи</h1>
           <div class="header-actions">
-            <button class="theme-toggle" type="button" (click)="toggleTheme()">
-              {{ themeService.isDarkMode ? '☀️ Светлая' : '🌙 Темная' }}
+            <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="themeService.isDarkMode ? 'Включить светлую тему' : 'Включить тёмную тему'">
+              {{ themeService.isDarkMode ? '☀' : '☾' }}
             </button>
             <button *ngIf="authService.isLoggedIn()" class="btn-logout" (click)="logout()">Выйти</button>
           </div>
