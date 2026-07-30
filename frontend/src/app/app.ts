@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common'; // Обязательно для
           <h1 class="title" style="margin: 0;">📝 Мои задачи</h1>
           <div class="header-actions">
             <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="themeService.isDarkMode ? 'Включить светлую тему' : 'Включить тёмную тему'">
-              {{ themeService.isDarkMode ? '☀' : '☾' }}
+              {{ themeService.isDarkMode ? '🌞' : '🌙' }}
             </button>
             <button *ngIf="authService.isLoggedIn()" class="btn-logout" (click)="logout()">Выйти</button>
           </div>
