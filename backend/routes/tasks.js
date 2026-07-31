@@ -20,6 +20,13 @@ router.get('/', authMiddleware, async (req, res) => {
             filter.date = req.query.date; // Добавляем дату в фильтр
         }
 
+        if (req.query.q) {
+            filter.title = {
+                $regex: req.query.q,
+                $options: 'i'
+            };
+        }
+
         // Ищем в базе по нашему собранному фильтру
         const tasks = await Task.find(filter).sort({ createdAt: -1 });
         res.status(200).json(tasks);

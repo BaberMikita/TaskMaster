@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ThemeService {
-  public isDarkMode = true;
+    // По умолчанию считаем, что тема темная
+    public isDarkMode = true;
 
-  constructor() {
-    const savedTheme = localStorage.getItem('app-theme');
-    this.applyTheme(savedTheme !== 'light');
-  }
+    constructor() {
+        // При старте приложения проверяем память браузера
+        const savedTheme = localStorage.getItem('app-theme');
 
-  toggleTheme(): void {
-    this.applyTheme(!this.isDarkMode);
-  }
+        if (savedTheme === 'light') {
+            this.isDarkMode = false;
+            document.body.classList.add('light-theme'); // Включаем светлую тему
+        }
+    }
 
-  private applyTheme(isDark: boolean): void {
-    this.isDarkMode = isDark;
-    document.body.classList.toggle('light-theme', !isDark);
-    localStorage.setItem('app-theme', isDark ? 'dark' : 'light');
-  }
+    // Метод для кнопки-переключателя
+    toggleTheme() {
+        this.isDarkMode = !this.isDarkMode;
+
+        if (this.isDarkMode) {
+            document.body.classList.remove('light-theme');
+            localStorage.setItem('app-theme', 'dark');
+        } else {
+            document.body.classList.add('light-theme');
+            localStorage.setItem('app-theme', 'light');
+        }
+    }
 }
-

@@ -55,6 +55,14 @@ import { CommonModule } from '@angular/common'; // Обязательно для
 
           <div class="task-add-block" style="margin-top: 12px;">
             <input
+              type="text"
+              [(ngModel)]="searchQuery"
+              (ngModelChange)="onSearchInput()"
+              placeholder="Поиск по задачам..."
+              class="task-input"
+              style="flex: 1;"
+            />
+            <input
               type="date"
               [(ngModel)]="filterDate"
               (change)="applyFilter()"
@@ -86,6 +94,8 @@ export class AppComponent implements OnInit {
   newTaskTitle = '';
   selectedDate = new Date().toISOString().split('T')[0];
   filterDate = '';
+  searchQuery = '';
+  private searchDebounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private taskService: TaskService,
@@ -97,6 +107,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       this.fetchTasks();
+      this.loadTasks();
     }
   }
 
@@ -153,15 +164,23 @@ export class AppComponent implements OnInit {
     });
   }
 
-  applyFilter() {
-    if (!this.filterDate) {
-      this.visibleTasks = [...this.tasks];
-      return;
+  onSearchInput() {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
     }
 
+    this.searchDebounceTimer = setTimeout(() => {
+      this.applyFilter();
+    }, 300);
+  }
+
+  applyFilter() {
+    const query = this.searchQuery.trim().toLowerCase();
+
     this.visibleTasks = this.tasks.filter(task => {
-      const taskDate = this.getDateKey(task.createdAt);
-      return taskDate === this.filterDate;
+      const matchesSearch = !query || (task.title || '').toLowerCase().includes(query);
+      const matchesDate = !this.filterDate || this.getDateKey(task.createdAt) === this.filterDate;
+      return matchesSearch && matchesDate;
     });
   }
 
@@ -184,7 +203,13 @@ export class AppComponent implements OnInit {
   }
 
   clearFilter() {
+    if (this.searchDebounceTimer) {
+      clearTimeout(this.searchDebounceTimer);
+      this.searchDebounceTimer = null;
+    }
+
     this.filterDate = '';
+    this.searchQuery = '';
     this.applyFilter();
   }
 
@@ -265,6 +290,15 @@ export class AppComponent implements OnInit {
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Ошибка при изменении статуса:', err)
+    });
+  }
+
+  loadTasks() {
+    this.taskService.getTasks(this.searchQuery, this.filterDate).subscribe({
+      next: (data) => {
+        this.tasks = data;
+        this.applyFilter();
+      }
     });
   }
 }

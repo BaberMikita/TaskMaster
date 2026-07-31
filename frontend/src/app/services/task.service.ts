@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from './task.model';
+import { HttpParams } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +14,18 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   // Получить все задачи (READ)
-  getTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.apiUrl);
+  getTasks(search = '', date = ''): Observable<Task[]> {
+    let params = new HttpParams();
+
+    if (search) {
+      params = params.set('q', search);
+    }
+
+    if (date) {
+      params = params.set('date', date);
+    }
+
+    return this.http.get<Task[]>(this.apiUrl, { params });
   }
 
   // Создать новую задачу (CREATE)
