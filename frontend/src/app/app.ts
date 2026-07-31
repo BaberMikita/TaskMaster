@@ -15,34 +15,34 @@ import { CommonModule } from '@angular/common'; // Обязательно для
     <div class="page" [class.light-theme]="!themeService.isDarkMode">
       <div class="card">
         <div class="header-row">
-          <h1 class="title" style="margin: 0;">📝 Мои задачи</h1>
+          <h1 class="title" style="margin: 0;">📝 My Tasks</h1>
           <div class="header-actions">
-            <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="themeService.isDarkMode ? 'Включить светлую тему' : 'Включить тёмную тему'">
+            <button class="theme-toggle" type="button" (click)="toggleTheme()" [attr.aria-label]="themeService.isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'">
               {{ themeService.isDarkMode ? '🌞' : '🌙' }}
             </button>
-            <button *ngIf="authService.isLoggedIn()" class="btn-logout" (click)="logout()">Выйти</button>
+            <button *ngIf="authService.isLoggedIn()" class="btn-logout" (click)="logout()">Log out</button>
           </div>
         </div>
         <p class="subtitle">Angular + Node.js + MongoDB</p>
 
         <!-- Форма авторизации -->
         <div *ngIf="!authService.isLoggedIn()" class="auth-container">
-          <h3 class="auth-title">Вход / Регистрация</h3>
+          <h3 class="auth-title">Sign In / Sign Up</h3>
           <input #email type="email" placeholder="Email" class="auth-input">
-          <input #password type="password" placeholder="Пароль" class="auth-input">
+          <input #password type="password" placeholder="Password" class="auth-input">
           <div class="auth-actions">
-            <button class="btn-add" style="flex: 1;" (click)="login(email.value, password.value)">Войти</button>
-            <button class="btn-secondary" style="flex: 1;" (click)="register(email.value, password.value)">Создать аккаунт</button>
+            <button class="btn-add" style="flex: 1;" (click)="login(email.value, password.value)">Sign In</button>
+            <button class="btn-secondary" style="flex: 1;" (click)="register(email.value, password.value)">Create account</button>
           </div>
         </div>
         
-        <!-- Задачи (показываем только если авторизован) -->
+        <!-- Tasks (shown only when logged in) -->
         <div *ngIf="authService.isLoggedIn()">
           <div class="task-add-block">
             <input
               type="text"
               [(ngModel)]="newTaskTitle"
-              placeholder="Название новой задачи..."
+              placeholder="New task title..."
               class="task-input"
             />
             <input
@@ -50,7 +50,7 @@ import { CommonModule } from '@angular/common'; // Обязательно для
               [(ngModel)]="selectedDate"
               class="task-date-input"
             />
-            <button class="btn-add" (click)="addNewTask()">+ Добавить</button>
+            <button class="btn-add" (click)="addNewTask()">+ Add</button>
           </div>
 
           <div class="task-add-block" style="margin-top: 12px;">
@@ -58,7 +58,7 @@ import { CommonModule } from '@angular/common'; // Обязательно для
               type="text"
               [(ngModel)]="searchQuery"
               (ngModelChange)="onSearchInput()"
-              placeholder="Поиск по задачам..."
+              placeholder="Search tasks..."
               class="task-input"
               style="flex: 1;"
             />
@@ -68,7 +68,7 @@ import { CommonModule } from '@angular/common'; // Обязательно для
               (change)="applyFilter()"
               class="task-date-input"
             />
-            <button class="btn-secondary" (click)="clearFilter()">Сбросить</button>
+            <button class="btn-secondary" (click)="clearFilter()">Reset</button>
           </div>
 
           <ul class="task-list">
@@ -81,7 +81,7 @@ import { CommonModule } from '@angular/common'; // Обязательно для
             </li>
           </ul>
           <p class="empty-msg" *ngIf="visibleTasks.length === 0">
-            🎉 Задач пока нет. База пуста!
+            🎉 No tasks yet. The database is empty!
           </p>
         </div>
       </div>
@@ -120,7 +120,7 @@ export class AppComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        alert('Ошибка при входе');
+        alert('Login failed');
       }
     });
   }
@@ -132,13 +132,13 @@ export class AppComponent implements OnInit {
         if (res.token) {
           this.fetchTasks(); // Если сервер вернул токен, сразу входим
         } else {
-          alert('Регистрация успешна! Теперь войдите с вашими данными.');
+          alert('Registration successful! Please sign in with your credentials.');
         }
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
-        alert('Ошибка при регистрации');
+        alert('Registration failed');
       }
     });
   }
@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
         this.applyFilter();
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('Ошибка соединения с сервером:', err)
+      error: (err) => console.error('Server connection error:', err)
     });
   }
 
@@ -215,7 +215,7 @@ export class AppComponent implements OnInit {
 
   formatCreatedAt(value?: string): string {
     if (!value) {
-      return 'Дата не указана';
+      return 'Date not specified';
     }
 
     const normalized = value.trim();
@@ -235,7 +235,7 @@ export class AppComponent implements OnInit {
 
   addNewTask() {
     if (!this.newTaskTitle) {
-      return alert('Введите название задачи');
+      return alert('Please enter a task title');
     }
 
     const newTaskPayload = {
@@ -251,24 +251,24 @@ export class AppComponent implements OnInit {
         this.selectedDate = new Date().toISOString().split('T')[0];
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('Ошибка при создании:', err)
+      error: (err) => console.error('Error creating task:', err)
     });
   }
 
   deleteTask(id: string) {
-    if (confirm('Вы уверены, что хотите удалить эту задачу?')) {
+    if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id).subscribe({
         next: () => {
           this.tasks = this.tasks.filter(t => t._id !== id);
           this.applyFilter();
           this.cdr.detectChanges();
         },
-        error: (err) => console.error('Ошибка удаления:', err)
+        error: (err) => console.error('Error deleting task:', err)
       });
     }
   }
   saveTask(id: any) {
-    const newTitle = prompt('Новое название задачи:', this.tasks.find(t => t._id === id)?.title);
+    const newTitle = prompt('New task title:', this.tasks.find(t => t._id === id)?.title);
     if (newTitle) {
       this.taskService.updateTask(id, newTitle).subscribe({
         next: (updatedTask) => {
@@ -276,7 +276,7 @@ export class AppComponent implements OnInit {
           this.applyFilter();
           this.cdr.detectChanges();
         },
-        error: (err) => console.error('Ошибка:', err)
+        error: (err) => console.error('Error:', err)
       })
     }
   }
@@ -289,7 +289,7 @@ export class AppComponent implements OnInit {
         this.applyFilter();
         this.cdr.detectChanges();
       },
-      error: (err) => console.error('Ошибка при изменении статуса:', err)
+      error: (err) => console.error('Error changing task status:', err)
     });
   }
 
